@@ -1,5 +1,5 @@
 <script lang="ts">
-  import svelteLogo from './assets/svelte.svg'
+  import profilePic from './assets/profile.jpg'
   import Counter from './lib/Counter.svelte'
 </script>
 
@@ -9,7 +9,7 @@
       <img src="/vite.svg" class="logo" alt="Vite Logo" />
     </a>
     <a href="https://svelte.dev" target="_blank" rel="noreferrer"> 
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
+      <img src={profilePic} alt="Profile Pictures" />
     </a>
   </div>
   <h1>Vite + Svelte</h1>
