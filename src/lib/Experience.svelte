@@ -1,9 +1,1 @@
-<section id="experience">
-svelte
-</section>
-
-<style>
-    section {
-        height: 100vh;
-    }
-</style>
+<article class="h-screen pt-14" id="experience">svelte</article>

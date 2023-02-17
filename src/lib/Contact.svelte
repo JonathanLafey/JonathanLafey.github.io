@@ -1,9 +1,3 @@
-<section id="contact">
-    <address>Limassol</address>
-</section>
-
-<style>
-    section {
-        height: 100vh;
-    }
-</style>
+<article class="h-screen pt-14" id="contact">
+  <address>Limassol</address>
+</article>
