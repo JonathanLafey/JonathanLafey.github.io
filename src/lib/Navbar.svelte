@@ -1,10 +1,10 @@
 <script lang="ts">
 </script>
 
-<nav class="bg-gray-800 h-14 fixed w-screen">
+<nav class="bg-gray-800 h-14 fixed w-screen z-10">
   <ul class="flex h-full gap-4 items-center justify-center">
     <li>
-      <a href="#">Home</a>
+      <a href="#top">Home</a>
     </li>
     <li>
       <a href="#experience">Experience</a>
