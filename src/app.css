@@ -6,6 +6,7 @@ html {
   background: #536976;
   background: -webkit-linear-gradient(to right, #536976, #292E49);
   background: linear-gradient(to right, #536976, #292E49);
+  @apply scroll-smooth
 }
 
 body {

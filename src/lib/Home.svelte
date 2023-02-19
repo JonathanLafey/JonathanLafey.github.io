@@ -3,7 +3,7 @@
 </script>
 
 <article class="min-h-screen pt-14 flex" id="home">
-  <section class="mx-12">
+  <section class="mx-4 md:mx-12">
     <h1 class="text-3xl my-8">Hi, I'm Dimitris</h1>
     <h2 class="italic mb-8">Front-End | Back-End | DBs | Cloud Architecture</h2>
     
