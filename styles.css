@@ -1,0 +1,443 @@
+/* ============================================================
+   Fonts (self-hosted, latin subset)
+   ============================================================ */
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/poppins-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/poppins-600.woff2") format("woff2");
+}
+
+/* ============================================================
+   Design tokens
+   ============================================================ */
+:root {
+  --bg-from: #536976;
+  --bg-to: #292e49;
+  --surface: #1f2937; /* nav bar */
+  --text: #ffffff;
+  --muted: rgb(255 255 255 / 0.75);
+  --accent: #7dd3fc;
+
+  --nav-h: 3.5rem;
+  --maxw: 70rem;
+  --pad-x: clamp(1rem, 5vw, 3rem);
+
+  --font: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  color-scheme: dark;
+}
+
+/* ============================================================
+   Reset / base
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  font-family: var(--font);
+  color: var(--text);
+  line-height: 1.6;
+  background: linear-gradient(to right, var(--bg-from), var(--bg-to)) fixed;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Skip link */
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.5rem 0.75rem;
+  background: var(--surface);
+  border-radius: 6px;
+  transform: translateY(-150%);
+  transition: transform 0.15s ease;
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* ============================================================
+   Navigation
+   - desktop: fixed bar at the top
+   - mobile: sticky bar pinned to the bottom
+   ============================================================ */
+header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  height: var(--nav-h);
+  background: var(--surface);
+}
+
+nav {
+  width: 100%;
+}
+
+nav ul {
+  display: flex;
+  gap: clamp(1rem, 4vw, 2.5rem);
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--muted);
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+nav a:hover {
+  color: var(--text);
+}
+
+/* set by main.js scroll-spy */
+nav a[aria-current="true"] {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+/* ============================================================
+   Layout primitives
+   ============================================================ */
+main {
+  /* leave room for the fixed top nav on desktop */
+  padding-top: var(--nav-h);
+}
+
+section {
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: clamp(2.5rem, 6vw, 4rem) var(--pad-x);
+  scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+
+section > h2 {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  margin-bottom: 2rem;
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero {
+  display: grid;
+  gap: clamp(1.5rem, 5vw, 3rem);
+  align-items: center;
+  min-height: calc(100svh - var(--nav-h));
+}
+
+.hero__text h1 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  margin-bottom: 1rem;
+}
+
+.tagline {
+  font-style: italic;
+  color: var(--muted);
+  margin: 0 0 1.5rem;
+}
+
+.hero__text p {
+  margin: 0 0 1rem;
+  max-width: 60ch;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid var(--text);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.cta:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.hero__photo img {
+  border-radius: 12px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Two columns once there is room for the portrait */
+@media (min-width: 48rem) {
+  .hero {
+    grid-template-columns: 3fr 2fr;
+  }
+  .hero__photo img {
+    margin-inline: auto;
+    max-width: 22rem;
+  }
+}
+
+/* ============================================================
+   Experience timeline
+   - single vertical rail; entries alternate via :nth-child
+   ============================================================ */
+.timeline {
+  position: relative;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 52rem;
+}
+
+/* the rail */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 8px;
+  width: 4px;
+  background: var(--text);
+  border-radius: 2px;
+}
+
+.entry {
+  position: relative;
+  padding: 0 0 2rem 2.25rem;
+}
+
+.entry:last-child {
+  padding-bottom: 0;
+}
+
+.entry h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.entry p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.entry a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.entry a:hover {
+  color: var(--accent);
+}
+
+.entry strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* the dot, sitting on the rail */
+.entry::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: var(--text);
+  border-radius: 50%;
+}
+
+/* Desktop: centered rail with alternating sides */
+@media (min-width: 48rem) {
+  .timeline::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .entry {
+    width: 50%;
+    padding-bottom: 2.5rem;
+  }
+
+  .entry:nth-child(odd) {
+    margin-left: 0;
+    padding-right: 2.25rem;
+    padding-left: 0;
+    text-align: right;
+  }
+
+  .entry:nth-child(even) {
+    margin-left: 50%;
+    padding-left: 2.25rem;
+    padding-right: 0;
+    text-align: left;
+  }
+
+  /* dots anchored to the centre rail */
+  .entry:nth-child(odd)::before {
+    left: auto;
+    right: -10px;
+  }
+  .entry:nth-child(even)::before {
+    left: -10px;
+  }
+}
+
+/* ============================================================
+   Contact
+   ============================================================ */
+#contact address {
+  font-style: normal;
+  margin: 1rem 0;
+}
+
+#contact a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+#contact a:hover {
+  color: var(--accent);
+}
+
+.find-me {
+  margin: 1.5rem 0 0.75rem;
+}
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.icon-link span {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.icon-link:hover span {
+  color: var(--accent);
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+footer {
+  padding: 2rem var(--pad-x);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   Mobile: move the nav to a sticky bottom bar
+   ============================================================ */
+@media (max-width: 47.99rem) {
+  header {
+    inset: auto 0 0 0; /* pin to bottom */
+    border-top: 1px solid rgb(255 255 255 / 0.1);
+  }
+
+  main {
+    padding-top: 0;
+    padding-bottom: var(--nav-h); /* clear the bottom bar */
+  }
+
+  section {
+    scroll-margin-top: 1rem;
+  }
+
+  .hero {
+    min-height: calc(100svh - var(--nav-h));
+    text-align: center;
+  }
+  .hero__photo {
+    order: -1; /* avatar above the text */
+  }
+  .hero__photo img {
+    width: 150px;
+    height: 150px;
+    margin-inline: auto;
+    border-radius: 50%;
+  }
+  .hero__text p {
+    margin-inline: auto;
+  }
+
+  nav a {
+    font-size: 0.95rem;
+  }
+
+  .socials {
+    justify-content: flex-start;
+  }
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
